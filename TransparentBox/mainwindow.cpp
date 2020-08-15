@@ -299,6 +299,11 @@ void MainWindow::on_TransparentBtn_clicked()
     QFile file(fileName);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QByteArray t = file.readAll();
+    if(t.length()<10)
+    {
+        QMessageBox::information(this,tr("提示"),tr("<p><span style='color: #FFFFFF;'>没有找到进程</span></p>"),QMessageBox::Yes);
+        return;
+    }
     QString contest=QString(t);
     file.close();
     QStringList splitList= contest.split('\n');
