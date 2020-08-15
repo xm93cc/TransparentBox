@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowOpacity(0.7);
+    setWindowOpacity(0.8);
     this->setWindowFlags(Qt::FramelessWindowHint);
     boundaryWidth=4;                                    //设置触发resize的宽度
     this->setMinimumSize(380,280);                        //设置最小尺寸
@@ -283,6 +283,12 @@ void MainWindow::on_TransparentBtn_clicked()
     {
         pid=edPid.toInt();
         transparentAppByPid(pid,level);
+        return;
+    }
+    if(processName.length()<2)
+    {
+        QMessageBox::warning(this,tr("警告"),tr("<p><span style='color: #FFFFFF;'>pid和processName必填一项</span></p>"),QMessageBox::Yes);
+
         return;
     }
     QString strcmmd=begin+processName+end;

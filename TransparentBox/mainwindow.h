@@ -11,6 +11,7 @@
 #include<QStandardItemModel>
 #include<QFileDialog>
 #include <shellapi.h>
+#include<QMessageBox>
 
 namespace Ui {
 class MainWindow;
