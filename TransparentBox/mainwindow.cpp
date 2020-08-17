@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+     this->setWindowIcon(QIcon(":/../res/home-ico.ico"));
     setWindowOpacity(0.8);
     this->setWindowFlags(Qt::FramelessWindowHint);
     boundaryWidth=4;                                    //设置触发resize的宽度
