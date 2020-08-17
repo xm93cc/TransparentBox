@@ -33,10 +33,12 @@ public:
 
 
 private slots:
-    void on_pushButton_clicked();
+
     void on_exit_clicked();
 
     void on_TransparentBtn_clicked();
+
+    void on_min_clicked();
 
 private:
     Ui::MainWindow *ui;

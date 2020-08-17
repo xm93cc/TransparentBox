@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>../res/red.png</file>
         <file>../res/timg.png</file>
+        <file>../res/touch-none.png</file>
+        <file>../res/touch-pass.png</file>
+        <file>../res/min-touch.png</file>
     </qresource>
 </RCC>

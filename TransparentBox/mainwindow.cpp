@@ -167,20 +167,6 @@ DWORD EnumWindowInfo(WindowInfo WInfo[])
 
 
 
-void MainWindow::on_pushButton_clicked()
-{
-
-    DWM_BLURBEHIND *pd;
-    pd->dwFlags=1;
-    pd->fEnable=1;
-
-
-    // HWND getwin= FindWindowA(nullptr, "C:\\Users\\QDebug\\Desktop\\new 1 - Notepad++");
-    //  DwmEnableBlurBehindWindow(getwin,pd);
-    // qDebug()<<getwin<<endl;
-}
-
-
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
     if(e->button()==Qt::LeftButton)
@@ -339,3 +325,8 @@ void MainWindow::on_TransparentBtn_clicked()
 
 }
 
+
+void MainWindow::on_min_clicked()
+{
+    this->showMinimized();
+}

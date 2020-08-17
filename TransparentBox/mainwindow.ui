@@ -297,6 +297,45 @@ color: rgb(255, 255, 255);</string>
      <string>PID Level greater than  ProcessName </string>
     </property>
    </widget>
+   <widget class="QPushButton" name="min">
+    <property name="geometry">
+     <rect>
+      <x>301</x>
+      <y>-2</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QPushButton#min
+{
+border-image: url(:/res/touch-none.png);
+border:1px solid #5F92B2;
+border-radius:5px;
+color:white
+}
+QPushButton#min:hover
+{
+border-image: url(:/res/touch-pass.png);
+color: rgb(170, 0, 0);
+border:1px solid #5F92B2;
+border-radius:5px;
+color:white;
+}
+QPushButton#min:hover:pressed
+{
+border-image:url(:/res/touch-pass.png);
+border:1px solid #3C80B1;
+border-radius:5px;
+color:white;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>TransparentBtn</zorder>
    <zorder>title</zorder>
    <zorder>EdPid</zorder>
@@ -307,6 +346,7 @@ color: rgb(255, 255, 255);</string>
    <zorder>ProcessName</zorder>
    <zorder>EdProcessName</zorder>
    <zorder>label</zorder>
+   <zorder>min</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
