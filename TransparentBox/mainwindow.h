@@ -12,7 +12,13 @@
 #include<QFileDialog>
 #include <shellapi.h>
 #include<QMessageBox>
-
+#include <QStringListModel>
+#include <QStandardItemModel>
+#include <QModelIndex>
+#include <stdio.h>
+#include <windows.h>
+#include <Tlhelp32.h>
+#include "task.h"
 namespace Ui {
 class MainWindow;
 }
@@ -31,6 +37,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void clickIndex();
+
 
 private slots:
 
@@ -40,6 +49,12 @@ private slots:
 
     void on_min_clicked();
 
+    void sendListener();
+
+    void on_listView_clicked(const QModelIndex &index);
+
+    void startInitData();
+
 private:
     Ui::MainWindow *ui;
     int boundaryWidth;
@@ -47,6 +62,10 @@ private:
     QStandardItemModel *processList;
     QString begin="cmd /c tasklist |findstr ";
     QString end="  > ./1.ini";
+    QStringListModel *Model;
+    QStandardItemModel *ItemModel;
+    QStringList strListl;
+    Task *task;
 
 private:
     void initModel();

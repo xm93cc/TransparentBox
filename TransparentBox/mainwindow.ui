@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>280</height>
+    <height>644</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>210</y>
+      <y>590</y>
       <width>361</width>
       <height>31</height>
      </rect>
@@ -79,9 +79,6 @@ color:white;
       <bold>true</bold>
      </font>
     </property>
-    <property name="tabletTracking">
-     <bool>false</bool>
-    </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
@@ -94,6 +91,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
+    </property>
+    <property name="tabletTracking" stdset="0">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="exit">
@@ -282,7 +282,7 @@ color: rgb(255, 255, 255);</string>
       <x>40</x>
       <y>180</y>
       <width>311</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -336,6 +336,55 @@ color:white;
      <string/>
     </property>
    </widget>
+   <widget class="QListView" name="listView">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>240</y>
+      <width>361</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:2px solid #FFFFFF;
+color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ProcessName_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>208</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>ProcessList</string>
+    </property>
+   </widget>
    <zorder>TransparentBtn</zorder>
    <zorder>title</zorder>
    <zorder>EdPid</zorder>
@@ -347,6 +396,8 @@ color:white;
    <zorder>EdProcessName</zorder>
    <zorder>label</zorder>
    <zorder>min</zorder>
+   <zorder>listView</zorder>
+   <zorder>ProcessName_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>

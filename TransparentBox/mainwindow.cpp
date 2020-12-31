@@ -13,8 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowOpacity(0.8);
     this->setWindowFlags(Qt::FramelessWindowHint);
     boundaryWidth=4;                                    //设置触发resize的宽度
-    this->setMinimumSize(380,280);                        //设置最小尺寸
-    this->setMaximumSize(380,280);
+    this->setMinimumSize(380,644);                        //设置最小尺寸
+    this->setMaximumSize(380,644);
 
     initData();
     QLineEdit *edPid=ui->EdPid;
@@ -29,6 +29,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QValidator *validatoredLevel = new QRegExpValidator(regxl, edPid );
     edLevel->setValidator( validatoredLevel );
     edLevel->setPlaceholderText("1~255");
+    initData();
+    this->task=new Task();
+    this->task->start();
+    connect(task,Task::isStartInit,this,&MainWindow::startInitData);
+}
+
+void MainWindow::startInitData()
+{
+    initData();
 }
 
 MainWindow::~MainWindow()
@@ -243,16 +252,53 @@ void MainWindow::initModel()
 
 void MainWindow::initData()
 {
-    // system("tasklist >> 1.txt");
+    if(this->strListl.size()>0)
+    {
+        strListl.clear();
+    }
+   ItemModel =new QStandardItemModel(this);
+         HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);
+            if (INVALID_HANDLE_VALUE == hSnapshot)
+            {
+                return ;
+            }
+            PROCESSENTRY32 pi;
+            pi.dwSize = sizeof(PROCESSENTRY32); //第一次使用必须初始化成员
+            BOOL bRet = Process32First(hSnapshot,&pi);
+            while (bRet)
+            {
+                /*
+                循环遍历添加自己的额外代码
+                */
+               // printf("进程ID = %d ,进程路径 = %s\r\n",pi.th32ProcessID,pi.szExeFile);
+                   QString str = QString::fromWCharArray(pi.szExeFile);
+
+                this->strListl.append( str);
+                bRet = Process32Next(hSnapshot,&pi);
+            }
+
+         int count= strListl.size();
+         for(int i=0;i<count;i++)
+         {
+             QString string =static_cast<QString>(strListl.at(i));
+             QStandardItem *item =new QStandardItem(string);
+             ItemModel->appendRow(item);
+         }
+
+
+
+         ui->listView->setModel(ItemModel);
+           ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+}
+
+void MainWindow::sendListener()
+{
+
 }
 
 void MainWindow::on_TransparentBtn_clicked()
 {
-    //WinExec("cmd /c tasklist |findstr notepad++ > tempdir\1.ini", SW_HIDE);
-    //ShellExecute(NULL, "open", "cmd", "/c date >D:\\test.txt", NULL, SW_HIDE);
-    // system("tasklist |findstr notepad++ > ./1.ini");
-
-
     QString edPid=ui->EdPid->text();
     QString edLevel=ui->EdLevel->text();
     QString processName=ui->EdProcessName->text();
@@ -329,4 +375,12 @@ void MainWindow::on_TransparentBtn_clicked()
 void MainWindow::on_min_clicked()
 {
     this->showMinimized();
+}
+
+void MainWindow::on_listView_clicked(const QModelIndex &index)
+{
+    if(this->strListl.size()>0)
+    {
+        ui->EdProcessName->setText(this->strListl.at(index.row()));
+    }
 }
