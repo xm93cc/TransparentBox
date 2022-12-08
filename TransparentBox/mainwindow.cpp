@@ -32,7 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
     initData();
     this->task=new Task();
     this->task->start();
-    connect(task,Task::isStartInit,this,&MainWindow::startInitData);
+    this->setWindowFlags(Qt::ToolTip);
+    createSystemTray();
+    connect(task,&Task::isStartInit,this,&MainWindow::startInitData);
 }
 
 void MainWindow::startInitData()
@@ -377,10 +379,83 @@ void MainWindow::on_min_clicked()
     this->showMinimized();
 }
 
+void MainWindow::createSystemTray()
+{
+    if(m_isShowSystemTray){
+        return;
+    }
+    m_isShowSystemTray=true;
+    m_pTrayMennu = new QMenu(this);
+    m_pSystemTray = new QSystemTrayIcon(this);
+    m_pTrayMennu->setStyleSheet("QMenu{\n"
+                                "  background:rgba(255,255,255,1);"
+                                "  border:none;"
+                                "}"
+                                "QMenu::item{"
+                                "  padding:11px 32px;"
+                                "  color:rgba(51,51,51,1);"
+                                "  font-size:12px;"
+                                "}"
+                                "QMenu::item:hover{"
+                                "  background-color:#409CE1;"
+                                "}"
+                                "QMenu::item:selected{"
+                                "  background-color:#409CE1;"
+                                "}");
+    //创建菜单项
+    m_pActionShow = new QAction(tr("Show pet"), this);
+  //  m_pActionShow->set
+    m_pActionHide = new QAction(tr("Hide pet"), this);
+    m_pActionModel = new QAction(tr("Model selecte"), this);
+    m_pActionSetting = new QAction(tr("Setting"), this);
+    m_pActionQuit = new QAction(tr("Exit"), this);
+
+    //添加菜单项
+    m_pTrayMennu->addAction(m_pActionShow);
+    m_pTrayMennu->addAction(m_pActionHide);
+    m_pTrayMennu->addAction(m_pActionModel);
+    m_pTrayMennu->addAction(m_pActionSetting);
+    m_pTrayMennu->addSeparator();
+    m_pTrayMennu->addAction(m_pActionQuit);
+
+    //为系统托盘设置菜单为m_pTrayMennu
+    m_pSystemTray->setContextMenu(m_pTrayMennu);
+    m_pSystemTray->setIcon(QIcon(":/res/home-ico.ico"));
+    connect(m_pActionShow,&QAction::triggered,m_pTrayMennu,[=](){
+        this->showNormal();
+    });
+
+
+    connect(m_pActionQuit,&QAction::triggered,m_pTrayMennu,[=](){
+        exit(0);
+    });
+    connect(m_pSystemTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(onActivated(QSystemTrayIcon::ActivationReason)));
+    m_pSystemTray->show();
+}
+
 void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
     if(this->strListl.size()>0)
     {
         ui->EdProcessName->setText(this->strListl.at(index.row()));
     }
+}
+
+
+void MainWindow::onActivated(QSystemTrayIcon::ActivationReason action){
+    qDebug()<<action;
+       if(action==QSystemTrayIcon::ActivationReason::Unknown){
+           qDebug()<<"未知点击";
+       }
+       else if(action==QSystemTrayIcon::ActivationReason::Context || action==QSystemTrayIcon::ActivationReason::Trigger){
+           qDebug()<<"鼠标单击";
+       }
+       else if(action==QSystemTrayIcon::ActivationReason::DoubleClick){
+           this->showNormal();
+       }
+       else if(action==QSystemTrayIcon::ActivationReason::MiddleClick){
+           qDebug()<<"鼠标中间单击";
+       }else{
+           return;
+       }
 }

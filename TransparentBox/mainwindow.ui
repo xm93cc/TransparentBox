@@ -66,9 +66,9 @@ color:white;
     <property name="geometry">
      <rect>
       <x>1</x>
-      <y>0</y>
+      <y>10</y>
       <width>381</width>
-      <height>31</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -78,6 +78,9 @@ color:white;
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -92,15 +95,12 @@ color: rgb(255, 255, 255);</string>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
     </property>
-    <property name="tabletTracking" stdset="0">
-     <bool>false</bool>
-    </property>
    </widget>
    <widget class="QPushButton" name="exit">
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>-2</y>
+      <y>10</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -175,10 +175,13 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);background-color: rgba(0,0,0,0.0);</string>
     </property>
     <property name="text">
      <string>PID</string>
+    </property>
+    <property name="indent">
+     <number>0</number>
     </property>
    </widget>
    <widget class="QLineEdit" name="EdLevel">
@@ -224,7 +227,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);background-color: rgba(0,0,0,0.0);</string>
     </property>
     <property name="text">
      <string>Level</string>
@@ -301,7 +304,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>301</x>
-      <y>-2</y>
+      <y>10</y>
       <width>41</width>
       <height>41</height>
      </rect>
